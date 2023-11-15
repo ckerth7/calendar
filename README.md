@@ -1,2 +1,2 @@
 # calendar
-A calendar used to try projects
+A calendar used to try GitHub Pages
