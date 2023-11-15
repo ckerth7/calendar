@@ -5,8 +5,8 @@
     <title>Kalender</title>
     <style>
         body {
-            background: rgb(15,138,95);
-            background: linear-gradient(138deg, rgba(15,138,95,1) 35%, rgba(255,255,255,1) 92%);
+            background: rgb(15, 138, 95);
+            background: linear-gradient(138deg, rgba(15, 138, 95, 1) 35%, rgba(255, 255, 255, 1) 92%);
         }
 
         .calendar-item {
@@ -52,14 +52,14 @@
         }
 
         @-webkit-keyframes glow {
-        from {
-            text-shadow: 0 0 20px #fff, 0 0 30px , 0 0 40px #FF7878, 0 0 50px #FF7878, 0 0 60px #FF7878, 0 0 70px #FF7878, 0 0 80px #FF7878;
-        }
-        to {
-            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 60px #fff, 0 0 70px #fff;
-        }
-}
+            from {
+                text-shadow: 0 0 20px #fff, 0 0 30px, 0 0 40px #FF7878, 0 0 50px #FF7878, 0 0 60px #FF7878, 0 0 70px #FF7878, 0 0 80px #FF7878;
+            }
 
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 60px #fff, 0 0 70px #fff;
+            }
+        }
     </style>
 </head>
 
@@ -206,7 +206,8 @@
         </div>
         <div class="calendar-item glow">
             <div id="18_1" class="hidden" onclick="toggleVisibility(18, 1)">
-                Erinnerst du dich an die <i>gewöhnungsbedürftige</i>musikalische Begleitung, die beim Schwimmen aus den Boxen dröhnte? ;)
+                Erinnerst du dich an die <i>gewöhnungsbedürftige</i> musikalische Begleitung, die beim Schwimmen aus den
+                Boxen dröhnte? ;)
             </div>
             <div id="18_2" class="visible" onclick="toggleVisibility(18, 2)">
                 18. Dezember
@@ -268,12 +269,12 @@
 
             const date = new Date();
             if (date.getMonth() != 11) {
-                // alert('Es muss Dezember sein.');
-                // return;
+                alert('Es muss Dezember sein.');
+                return;
             }
             if (day > date.getDate()) {
-                // alert('Zu früh :)');
-                // return;
+                alert('Zu früh :)');
+                return;
             }
 
             if (number == 2) {
