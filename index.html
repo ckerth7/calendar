@@ -5,7 +5,8 @@
     <title>Kalender</title>
     <style>
         body {
-            background-color: #0F8A5F;
+            background: rgb(15,138,95);
+            background: linear-gradient(138deg, rgba(15,138,95,1) 35%, rgba(255,255,255,1) 92%);
         }
 
         .calendar-item {
@@ -19,11 +20,14 @@
             cursor: pointer;
             text-align: left;
             line-break: loose;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
         }
 
         .calendar-item:hover {
             color: white;
-            background-color: #34A65F;
+            background-color: #D6001C;
         }
 
         .hidden {
@@ -49,10 +53,10 @@
 
         @-webkit-keyframes glow {
         from {
-            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+            text-shadow: 0 0 20px #fff, 0 0 30px , 0 0 40px #FF7878, 0 0 50px #FF7878, 0 0 60px #FF7878, 0 0 70px #FF7878, 0 0 80px #FF7878;
         }
         to {
-            text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 60px #fff, 0 0 70px #fff;
         }
 }
 
@@ -264,12 +268,12 @@
 
             const date = new Date();
             if (date.getMonth() != 11) {
-                // alert('Es muss Dezember sein.');
-                // return;
+                alert('Es muss Dezember sein.');
+                return;
             }
             if (day > date.getDate()) {
-                // alert('Zu früh :)');
-                // return;
+                alert('Zu früh :)');
+                return;
             }
 
             if (number == 2) {
