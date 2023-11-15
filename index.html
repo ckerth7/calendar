@@ -1,1 +1,292 @@
-<h1>Calendar</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Kalender</title>
+    <style>
+        body {
+            background-color: #0F8A5F;
+        }
+
+        .calendar-item {
+            background-color: #235E6F;
+            padding: 10px;
+            border: solid;
+            border-top-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            font-family: sans-serif;
+            font-size: 40px;
+            cursor: pointer;
+            text-align: left;
+            line-break: loose;
+        }
+
+        .calendar-item:hover {
+            color: white;
+            background-color: #34A65F;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .glow {
+            font-size: 40px;
+            color: #fff;
+            -webkit-animation: glow 1s ease-in-out infinite alternate;
+            -moz-animation: glow 1s ease-in-out infinite alternate;
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        @-webkit-keyframes glow {
+        from {
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+        }
+        to {
+            text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+        }
+}
+
+    </style>
+</head>
+
+<body>
+
+    <h1 class="glow">Adventkalender für einen ganz lieben Menschen!</h1>
+
+    <div class="flex-container">
+        <div class="calendar-item glow">
+            <div id="1_1" class="hidden" onclick="toggleVisibility(1, 1)">
+                Test
+            </div>
+            <div id="1_2" class="visible" onclick="toggleVisibility(1, 2)">
+                1. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="2_1" class="hidden" onclick="toggleVisibility(2, 1)">
+                Test
+            </div>
+            <div id="2_2" class="visible" onclick="toggleVisibility(2, 2)">
+                2. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="3_1" class="hidden" onclick="toggleVisibility(3, 1)">
+                Test
+            </div>
+            <div id="3_2" class="visible" onclick="toggleVisibility(3, 2)">
+                3. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="4_1" class="hidden" onclick="toggleVisibility(4, 1)">
+                Test
+            </div>
+            <div id="4_2" class="visible" onclick="toggleVisibility(4, 2)">
+                4. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="5_1" class="hidden" onclick="toggleVisibility(5, 1)">
+                Test
+            </div>
+            <div id="5_2" class="visible" onclick="toggleVisibility(5, 2)">
+                5. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="6_1" class="hidden" onclick="toggleVisibility(6, 1)">
+                Test
+            </div>
+            <div id="6_2" class="visible" onclick="toggleVisibility(6, 2)">
+                6. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="7_1" class="hidden" onclick="toggleVisibility(7, 1)">
+                Test
+            </div>
+            <div id="7_2" class="visible" onclick="toggleVisibility(7, 2)">
+                7. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="8_1" class="hidden" onclick="toggleVisibility(8, 1)">
+                Test
+            </div>
+            <div id="8_2" class="visible" onclick="toggleVisibility(8, 2)">
+                8. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="9_1" class="hidden" onclick="toggleVisibility(9, 1)">
+                Test
+            </div>
+            <div id="9_2" class="visible" onclick="toggleVisibility(9, 2)">
+                9. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="10_1" class="hidden" onclick="toggleVisibility(10, 1)">
+                Test
+            </div>
+            <div id="10_2" class="visible" onclick="toggleVisibility(10, 2)">
+                10. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="11_1" class="hidden" onclick="toggleVisibility(11, 1)">
+                Test
+            </div>
+            <div id="11_2" class="visible" onclick="toggleVisibility(11, 2)">
+                11. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="12_1" class="hidden" onclick="toggleVisibility(12, 1)">
+                Test
+            </div>
+            <div id="12_2" class="visible" onclick="toggleVisibility(12, 2)">
+                12. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="13_1" class="hidden" onclick="toggleVisibility(13, 1)">
+                Test
+            </div>
+            <div id="13_2" class="visible" onclick="toggleVisibility(13, 2)">
+                13. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="14_1" class="hidden" onclick="toggleVisibility(14, 1)">
+                Test
+            </div>
+            <div id="14_2" class="visible" onclick="toggleVisibility(14, 2)">
+                14. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="15_1" class="hidden" onclick="toggleVisibility(15, 1)">
+                Test
+            </div>
+            <div id="15_2" class="visible" onclick="toggleVisibility(15, 2)">
+                15. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="16_1" class="hidden" onclick="toggleVisibility(16, 1)">
+                Test
+            </div>
+            <div id="16_2" class="visible" onclick="toggleVisibility(16, 2)">
+                16. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="17_1" class="hidden" onclick="toggleVisibility(17, 1)">
+                Test
+            </div>
+            <div id="17_2" class="visible" onclick="toggleVisibility(17, 2)">
+                17. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="18_1" class="hidden" onclick="toggleVisibility(18, 1)">
+                Test
+            </div>
+            <div id="18_2" class="visible" onclick="toggleVisibility(18, 2)">
+                18. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="19_1" class="hidden" onclick="toggleVisibility(19, 1)">
+                Test
+            </div>
+            <div id="19_2" class="visible" onclick="toggleVisibility(19, 2)">
+                19. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="20_1" class="hidden" onclick="toggleVisibility(20, 1)">
+                Test
+            </div>
+            <div id="20_2" class="visible" onclick="toggleVisibility(20, 2)">
+                20. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="21_1" class="hidden" onclick="toggleVisibility(21, 1)">
+                Test
+            </div>
+            <div id="21_2" class="visible" onclick="toggleVisibility(21, 2)">
+                21. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="22_1" class="hidden" onclick="toggleVisibility(22, 1)">
+                Test
+            </div>
+            <div id="22_2" class="visible" onclick="toggleVisibility(22, 2)">
+                22. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="23_1" class="hidden" onclick="toggleVisibility(23, 1)">
+                Test
+            </div>
+            <div id="23_2" class="visible" onclick="toggleVisibility(23, 2)">
+                23. Dezember
+            </div>
+        </div>
+        <div class="calendar-item glow">
+            <div id="24_1" class="hidden" onclick="toggleVisibility(24, 1)">
+                Test
+            </div>
+            <div id="24_2" class="visible" onclick="toggleVisibility(24, 2)">
+                24. Dezember
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function toggleVisibility(day, number) {
+
+            const date = new Date();
+            if (date.getMonth() != 11) {
+                // alert('Es muss Dezember sein.');
+                // return;
+            }
+            if (day > date.getDate()) {
+                // alert('Zu früh :)');
+                // return;
+            }
+
+            if (number == 2) {
+                document.getElementById(day + '_1').classList.remove('hidden');
+                document.getElementById(day + '_1').classList.add('visible');
+                document.getElementById(day + '_2').classList.remove('visible');
+                document.getElementById(day + '_2').classList.add('hidden');
+            } else {
+                document.getElementById(day + '_1').classList.remove('visible');
+                document.getElementById(day + '_1').classList.add('hidden');
+                document.getElementById(day + '_2').classList.remove('hidden');
+                document.getElementById(day + '_2').classList.add('visible');
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
