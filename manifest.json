@@ -2,7 +2,7 @@
     "lang": "de-at",
     "name": "Kalendar",
     "short_name": "Kalender",
-    "description": "Ein Adventskalender für einen ganz lieben Menschen!",
+    "description": "Ein Adventskalender für einen lieben Menschen!",
     "theme_color": "#9013fe",
     "scope": "/calendar/",
     "start_url": "/calendar/",
