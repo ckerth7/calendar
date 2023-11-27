@@ -4,6 +4,7 @@
 <head>
     <title>Kalender</title>
     <meta charset="utf-8">
+    <link rel="canonical" href="https://ckerth7.github.io/calendar/" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -80,6 +81,11 @@
 
 <body>
 
+    <script>
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.register('/calendar/sw.js', {scope: '/calendar/'})
+        }
+    </script>
     <div class="row">
         <img src="apple-touch-icon.png" class="logo-padding" alt="Herz als Logo" width="32" height="32">
         <h1 class="glow">Adventskalender für einen lieben Menschen!</h1>
@@ -280,14 +286,7 @@
             </div>
         </div>
     </div>
-
     <script src="calendar.js"></script>
-
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js', { scope: '/' });
-        }
-    </script>
 
 </body>
 
