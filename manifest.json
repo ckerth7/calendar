@@ -3,7 +3,8 @@
     "name": "Kalendar",
     "short_name": "Kalender",
     "description": "Ein Adventskalender für einen ganz lieben Menschen!",
-    "start_url": "/",
+    "scope": "/calendar/",
+    "start_url": "/calendar/",
     "orientation": "any",
     "display": "standalone",
     "icons": [
