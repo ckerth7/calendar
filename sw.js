@@ -7,7 +7,8 @@ self.addEventListener('install', event => {
     cache.addAll([
       '/calendar/',
       '/calendar/index.html',
-      '/calendar/calendar.js'
+      '/calendar/calendar.js',
+      '/calendar/apple-touch-icon.png'
     ]);
   })());
 });
