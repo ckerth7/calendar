@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Kalender</title>
+    <title>Fortschritt</title>
     <meta charset="utf-8">
     <link rel="canonical" href="https://ckerth7.github.io/calendar/" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -11,70 +11,163 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png" width="32" height="32">
     <meta name="theme-color" content="#0F8A5F" />
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            background: rgb(15, 138, 95);
-            background: linear-gradient(138deg, rgba(15, 138, 95, 1) 35%, rgba(255, 255, 255, 1) 92%);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 30px 20px;
+            background: #f5f6f8;
+            color: #222;
         }
 
-        .calendar-item {
-            background-color: #235E6F;
-            padding: 10px;
-            border: solid;
-            border-top-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            font-family: sans-serif;
-            font-size: 40px;
-            cursor: pointer;
-            text-align: left;
-            line-break: loose;
-            margin-top: 10px;
-            margin-left: 10px;
-            margin-right: 10px;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .calendar-item:hover {
-            color: white;
-            background-color: #D6001C;
+        h1 {
+            font-size: 26px;
+            margin-bottom: 8px;
         }
 
-        .hidden {
-            display: none;
+        .description {
+            color: #666;
+            margin-bottom: 25px;
         }
 
-        .visible {
-            display: block;
+        .scale {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 12px;
         }
 
-        .flex-container {
+        .box {
+            min-height: 145px;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 16px 10px;
             display: flex;
             flex-direction: column;
-        }
-
-        .row {
-            display: flex;
-            flex-direction: row;
             align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            color: #172016;
+            transition: transform 0.15s, border-color 0.15s;
+            overflow-wrap: anywhere;
         }
 
-        .logo-padding {
-            padding: 10px;
+        .box:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 0, 0, 0.35);
         }
 
-        .glow {
-            font-size: 40px;
-            color: #fff;
-            -webkit-animation: glow 1s ease-in-out infinite alternate;
-            -moz-animation: glow 1s ease-in-out infinite alternate;
-            animation: glow 1s ease-in-out infinite alternate;
+        .box:focus-visible {
+            outline: 3px solid #222;
+            outline-offset: 3px;
         }
 
-        @-webkit-keyframes glow {
-            from {
-                text-shadow: 0 0 20px #fff, 0 0 30px, 0 0 40px #FF7878, 0 0 50px #FF7878, 0 0 60px #FF7878, 0 0 70px #FF7878, 0 0 80px #FF7878;
+        .number {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .box-text {
+            font-size: 14px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+        }
+
+        .edit-hint {
+            font-size: 11px;
+            margin-top: 12px;
+            opacity: 0.75;
+        }
+
+        .status {
+            margin-top: 20px;
+            min-height: 22px;
+            font-size: 13px;
+            color: #387344;
+        }
+
+        .reset {
+            margin-top: 12px;
+            padding: 10px 16px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .reset:hover {
+            background: #eee;
+        }
+
+        /* Bearbeitungsfenster */
+        dialog {
+            width: min(420px, calc(100% - 30px));
+            border: none;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        dialog h2 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        textarea {
+            display: block;
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px solid #bbb;
+            border-radius: 7px;
+            font: inherit;
+            resize: vertical;
+        }
+
+        .dialog-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .dialog-actions button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .cancel {
+            background: #eee;
+        }
+
+        .save {
+            background: #2563eb;
+            color: white;
+        }
+
+        @media (max-width: 480px) {
+            .scale {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
-            to {
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 60px #fff, 0 0 70px #fff;
+            .box {
+                min-height: 125px;
             }
         }
     </style>
@@ -87,207 +180,205 @@
             navigator.serviceWorker.register('/calendar/sw.js', {scope: '/calendar/'})
         }
     </script>
-    <div class="row">
-        <img src="apple-touch-icon.png" class="logo-padding" alt="Herz als Logo" width="32" height="32">
-        <h1 class="glow">Adventskalender für einen lieben Menschen!</h1>
+
+    <div class="container">
+
+    <h1>Fortschritt</h1>
+    <p class="description">
+        Klicke auf ein Level, um den zugehörigen Inhalt zu bearbeiten.
+    </p>
+
+    <div class="scale" id="scale"></div>
+
+    <div class="status" id="status" aria-live="polite">
+        Inhalt wird automatisch gespeichert.
     </div>
 
-    <div class="flex-container">
-        <div class="calendar-item glow">
-            <div id="1_1" class="hidden" onclick="toggleVisibility(1, 1)">
-                Ich liebe deinen guten Charakter!
-            </div>
-            <div id="1_2" class="visible" onclick="toggleVisibility(1, 2)">
-                1. Dezember
-            </div>
+    <button class="reset" id="reset" type="button">
+        Alle Inhalte zurücksetzen
+    </button>
+
+</div>
+
+<dialog id="editor">
+    <form id="editForm">
+        <h2 id="editorTitle">Inhalt bearbeiten</h2>
+
+        <label for="textInput">
+            Inhalt für dieses Level:
+        </label>
+
+        <textarea
+            id="textInput"
+            maxlength="2000"
+            placeholder="Hier deinen Inhalt eingeben ..."
+        ></textarea>
+
+        <div class="dialog-actions">
+            <button type="button" class="cancel" id="cancel">
+                Abbrechen
+            </button>
+
+            <button type="submit" class="save">
+                Speichern
+            </button>
         </div>
-        <div class="calendar-item glow">
-            <div id="2_1" class="hidden" onclick="toggleVisibility(2, 1)">
-                Ein Gespräch mit dir erfüllt mein Herz mit Wärme.
-            </div>
-            <div id="2_2" class="visible" onclick="toggleVisibility(2, 2)">
-                2. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="3_1" class="hidden" onclick="toggleVisibility(3, 1)">
-                Dein zartes Wesen berührt meine Seele.
-            </div>
-            <div id="3_2" class="visible" onclick="toggleVisibility(3, 2)">
-                3. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="4_1" class="hidden" onclick="toggleVisibility(4, 1)">
-                Treiben Sirenen auch in der kalten Jahreszeit ihr Unwesen?
-            </div>
-            <div id="4_2" class="visible" onclick="toggleVisibility(4, 2)">
-                4. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="5_1" class="hidden" onclick="toggleVisibility(5, 1)">
-                Auch Wanderungen auf bekanntem Terrain können überaschende Ausgänge nehmen...
-            </div>
-            <div id="5_2" class="visible" onclick="toggleVisibility(5, 2)">
-                5. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="6_1" class="hidden" onclick="toggleVisibility(6, 1)">
-                Ich denke gerade an dich ;)
-            </div>
-            <div id="6_2" class="visible" onclick="toggleVisibility(6, 2)">
-                6. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="7_1" class="hidden" onclick="toggleVisibility(7, 1)">
-                Wahre Beziehungen sind zerbrechlich und hängen auf einem seidenen Faden!
-            </div>
-            <div id="7_2" class="visible" onclick="toggleVisibility(7, 2)">
-                7. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="8_1" class="hidden" onclick="toggleVisibility(8, 1)">
-                Wir stehen auf Augenhöhe. Das schätze ich sehr an uns!
-            </div>
-            <div id="8_2" class="visible" onclick="toggleVisibility(8, 2)">
-                8. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="9_1" class="hidden" onclick="toggleVisibility(9, 1)">
-                Dein Zwinkern bringt mich zum Strahlen :)
-            </div>
-            <div id="9_2" class="visible" onclick="toggleVisibility(9, 2)">
-                9. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="10_1" class="hidden" onclick="toggleVisibility(10, 1)">
-                Danke das es dich gibt!
-            </div>
-            <div id="10_2" class="visible" onclick="toggleVisibility(10, 2)">
-                10. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="11_1" class="hidden" onclick="toggleVisibility(11, 1)">
-                Zartes Mondlicht spiegelt sich im dunklen See und verzaubert dessen Bewohner...
-            </div>
-            <div id="11_2" class="visible" onclick="toggleVisibility(11, 2)">
-                11. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="12_1" class="hidden" onclick="toggleVisibility(12, 1)">
-                Glück ist Liebe, nichts anderes. Wer lieben kann, ist glücklich. - Hermann Hesse
-            </div>
-            <div id="12_2" class="visible" onclick="toggleVisibility(12, 2)">
-                12. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="13_1" class="hidden" onclick="toggleVisibility(13, 1)">
-                Das Lächeln, das du aussendest, kehrt zu dir zurück. - Indisches Sprichwort
-            </div>
-            <div id="13_2" class="visible" onclick="toggleVisibility(13, 2)">
-                13. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="14_1" class="hidden" onclick="toggleVisibility(14, 1)">
-                I can fall for you forever, I'm certain<br>'Cause I still get nervous - John Legend (Song Nervous)
-            </div>
-            <div id="14_2" class="visible" onclick="toggleVisibility(14, 2)">
-                14. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="15_1" class="hidden" onclick="toggleVisibility(15, 1)">
-                Ein mystischer Ort schenkte uns heilsames Wasser... Erinnerst du dich?
-            </div>
-            <div id="15_2" class="visible" onclick="toggleVisibility(15, 2)">
-                15. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="16_1" class="hidden" onclick="toggleVisibility(16, 1)">
-                Ich liebe es, wenn du einen Spaziergang als <i>Lauf</i> bezeichnest :)
-            </div>
-            <div id="16_2" class="visible" onclick="toggleVisibility(16, 2)">
-                16. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="17_1" class="hidden" onclick="toggleVisibility(17, 1)">
-                Ich wurde von einer ganz lieben Person verzaubert... Wer das wohl ist?
-            </div>
-            <div id="17_2" class="visible" onclick="toggleVisibility(17, 2)">
-                17. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="18_1" class="hidden" onclick="toggleVisibility(18, 1)">
-                Erinnerst du dich an die <i>gewöhnungsbedürftige</i> musikalische Begleitung, die beim Schwimmen aus den
-                Boxen dröhnte? ;)
-            </div>
-            <div id="18_2" class="visible" onclick="toggleVisibility(18, 2)">
-                18. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="19_1" class="hidden" onclick="toggleVisibility(19, 1)">
-                Von elektronischer Musik zu Heavy Metal! Musik ist wunderschön.
-            </div>
-            <div id="19_2" class="visible" onclick="toggleVisibility(19, 2)">
-                19. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="20_1" class="hidden" onclick="toggleVisibility(20, 1)">
-                Bald ist der 24. Dezember. Schon aufgeregt?
-            </div>
-            <div id="20_2" class="visible" onclick="toggleVisibility(20, 2)">
-                20. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="21_1" class="hidden" onclick="toggleVisibility(21, 1)">
-                Die Begeisterung für Fortnite teilen wir wohl nicht ;)
-            </div>
-            <div id="21_2" class="visible" onclick="toggleVisibility(21, 2)">
-                21. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="22_1" class="hidden" onclick="toggleVisibility(22, 1)">
-                Deine Augen sind so schön wie der Ozean...
-            </div>
-            <div id="22_2" class="visible" onclick="toggleVisibility(22, 2)">
-                22. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="23_1" class="hidden" onclick="toggleVisibility(23, 1)">
-                Liebe trotzt sogar dem beklämmenden Gefühl von Angst.
-            </div>
-            <div id="23_2" class="visible" onclick="toggleVisibility(23, 2)">
-                23. Dezember
-            </div>
-        </div>
-        <div class="calendar-item glow">
-            <div id="24_1" class="hidden" onclick="toggleVisibility(24, 1)">
-                Ich liebe dich!
-            </div>
-            <div id="24_2" class="visible" onclick="toggleVisibility(24, 2)">
-                24. Dezember
-            </div>
-        </div>
-    </div>
-    <script src="calendar2.js"></script>
+    </form>
+</dialog>
+
+<script>
+    const scale = document.getElementById("scale");
+    const editor = document.getElementById("editor");
+    const editForm = document.getElementById("editForm");
+    const textInput = document.getElementById("textInput");
+    const editorTitle = document.getElementById("editorTitle");
+    const status = document.getElementById("status");
+
+    const STORAGE_KEY = "bewertungsskala_0_bis_10";
+
+    // Starttexte für alle Zahlen
+    const defaults = {
+        0: "Sehr gut",
+        1: "",
+        2: "",
+        3: "",
+        4: "",
+        5: "Mittel",
+        6: "",
+        7: "",
+        8: "",
+        9: "",
+        10: "Sehr schlecht"
+    };
+
+    let texts = loadTexts();
+    let activeNumber = null;
+
+    // Farben: Grün (0) über Gelb bis Rot (10)
+    function getColor(number) {
+        const hue = 120 - number * 12;
+        return `hsl(${hue}, 75%, 65%)`;
+    }
+
+    function loadTexts() {
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+
+            if (stored) {
+                const parsed = JSON.parse(stored);
+
+                for (let i = 0; i <= 10; i++) {
+                    if (typeof parsed[i] !== "string") {
+                        parsed[i] = defaults[i];
+                    }
+                }
+
+                return parsed;
+            }
+        } catch (error) {
+            console.warn("Gespeicherte Inhalte konnten nicht geladen werden.", error);
+        }
+
+        return { ...defaults };
+    }
+
+    function saveTexts() {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(texts));
+            status.textContent = "✓ Änderungen wurden gespeichert.";
+            return true;
+        } catch (error) {
+            status.textContent =
+                "Speichern nicht möglich. Bitte Browsereinstellungen prüfen.";
+            return false;
+        }
+    }
+
+    function render() {
+        scale.replaceChildren();
+
+        for (let i = 0; i <= 10; i++) {
+            const box = document.createElement("button");
+
+            box.type = "button";
+            box.className = "box";
+            box.style.backgroundColor = getColor(i);
+            box.setAttribute(
+                "aria-label",
+                `Bewertung ${i}: ${texts[i] || "Kein Inhalt"}. Bearbeiten`
+            );
+
+            const number = document.createElement("span");
+            number.className = "number";
+            number.textContent = i;
+
+            const text = document.createElement("span");
+            text.className = "box-text";
+            text.textContent = texts[i] || "Kein Inhalt";
+
+            const hint = document.createElement("span");
+            hint.className = "edit-hint";
+            hint.textContent = "✎ Inhalt bearbeiten";
+
+            box.append(number, text, hint);
+
+            box.addEventListener("click", () => openEditor(i));
+
+            scale.appendChild(box);
+        }
+    }
+
+    function openEditor(number) {
+        activeNumber = number;
+
+        editorTitle.textContent = `Inhalt für Bewertung ${number}`;
+        textInput.value = texts[number] || "";
+
+        editor.showModal();
+        textInput.focus();
+    }
+
+    editForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        if (activeNumber === null) return;
+
+        const oldText = texts[activeNumber];
+        texts[activeNumber] = textInput.value.trim();
+
+        if (!saveTexts()) {
+            texts[activeNumber] = oldText;
+            return;
+        }
+
+        render();
+        editor.close();
+        activeNumber = null;
+    });
+
+    document.getElementById("cancel").addEventListener("click", () => {
+        editor.close();
+        activeNumber = null;
+    });
+
+    document.getElementById("reset").addEventListener("click", () => {
+        const confirmed = confirm(
+            "Möchtest du wirklich alle Inhalte zurücksetzen?"
+        );
+
+        if (!confirmed) return;
+
+        texts = { ...defaults };
+
+        if (saveTexts()) {
+            render();
+            status.textContent = "Alle Inhalte wurden zurückgesetzt.";
+        }
+    });
+
+    // Initiale Anzeige
+    render();
+</script>
 
 </body>
 
