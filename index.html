@@ -11,167 +11,166 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png" width="32" height="32">
     <meta name="theme-color" content="#0F8A5F" />
     <style>
-        * {
-            box-sizing: border-box;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 30px 20px;
-            background: #f5f6f8;
-            color: #222;
-        }
+    body {
+      max-width: 680px;
+      margin: 40px auto;
+      padding: 0 16px;
+      font-family: system-ui, sans-serif;
+      color: #222;
+      background: #f5f6f8;
+    }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+    h1 {
+      margin-bottom: 20px;
+    }
 
-        h1 {
-            font-size: 26px;
-            margin-bottom: 8px;
-        }
+    #add-task {
+      padding: 10px 16px;
+      border: 0;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font: inherit;
+      cursor: pointer;
+    }
 
-        .description {
-            color: #666;
-            margin-bottom: 25px;
-        }
+    #add-task:hover {
+      background: #1d4ed8;
+    }
 
-        .scale {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 12px;
-        }
+    #tasks {
+      display: grid;
+      gap: 10px;
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+    }
 
-        .box {
-            min-height: 145px;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            padding: 16px 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            cursor: pointer;
-            color: #172016;
-            transition: transform 0.15s, border-color 0.15s;
-            overflow-wrap: anywhere;
-        }
+    .task {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid #aaa;
+      border-radius: 10px;
+    }
 
-        .box:hover {
-            transform: translateY(-3px);
-            border-color: rgba(0, 0, 0, 0.35);
-        }
+    .task input[type="text"] {
+      flex: 1;
+      min-width: 0;
+      padding: 8px;
+      border: 1px solid #888;
+      border-radius: 6px;
+      font: inherit;
+    }
 
-        .box:focus-visible {
-            outline: 3px solid #222;
-            outline-offset: 3px;
-        }
+    .score-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-        .number {
-            font-size: 30px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+    .score-controls button,
+    .delete-button {
+      height: 36px;
+      border: 1px solid #888;
+      border-radius: 6px;
+      background: white;
+      font: inherit;
+      cursor: pointer;
+    }
 
-        .box-text {
-            font-size: 14px;
-            line-height: 1.4;
-            white-space: pre-wrap;
-        }
+    .score-controls button {
+      width: 36px;
+      font-size: 1.2rem;
+    }
 
-        .edit-hint {
-            font-size: 11px;
-            margin-top: 12px;
-            opacity: 0.75;
-        }
+    .score-controls button:hover {
+      background: #eee;
+    }
 
-        .status {
-            margin-top: 20px;
-            min-height: 22px;
-            font-size: 13px;
-            color: #387344;
-        }
+    .score-controls input[type="number"] {
+      width: 64px;
+      padding: 8px;
+      border: 1px solid #888;
+      border-radius: 6px;
+      font: inherit;
+      text-align: center;
+    }
 
-        .reset {
-            margin-top: 12px;
-            padding: 10px 16px;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-            background: white;
-            cursor: pointer;
-        }
+    .score-label {
+      min-width: 70px;
+      font-size: 0.9rem;
+      text-align: right;
+    }
 
-        .reset:hover {
-            background: #eee;
-        }
+    .delete-button {
+      padding: 0 10px;
+      color: #b42318;
+    }
 
-        /* Bearbeitungsfenster */
-        dialog {
-            width: min(420px, calc(100% - 30px));
-            border: none;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        }
+    .delete-button:hover {
+      background: #fee4e2;
+    }
+    
+    .task {
+      min-width: 0;
+    }
 
-        dialog::backdrop {
-            background: rgba(0, 0, 0, 0.45);
-        }
+.task input[type="text"] {
+  min-width: 0;
+}
+.task textarea {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  min-height: 38px;
+  padding: 8px;
+  border: 1px solid #888;
+  border-radius: 6px;
+  font: inherit;
+  line-height: 1.4;
+  resize: none;
+  overflow: hidden;
+}
 
-        dialog h2 {
-            margin-top: 0;
-            font-size: 20px;
-        }
+.score-controls .increment-button,
+.score-controls .decrement-button {
+  background: #d1d5db;
+  border-color: #9ca3af;
+  color: #333;
+}
 
-        textarea {
-            display: block;
-            width: 100%;
-            min-height: 120px;
-            padding: 12px;
-            margin: 15px 0;
-            border: 1px solid #bbb;
-            border-radius: 7px;
-            font: inherit;
-            resize: vertical;
-        }
+.score-controls .increment-button:hover,
+.score-controls .decrement-button:hover {
+  background: #bfc5ce;
+}
 
-        .dialog-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
+@media (max-width: 520px) {
+  .task {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+  }
 
-        .dialog-actions button {
-            padding: 10px 16px;
-            border: none;
-            border-radius: 7px;
-            cursor: pointer;
-            font-size: 14px;
-        }
+  .task textarea {
+    grid-column: 1 / -1;
+  }
 
-        .cancel {
-            background: #eee;
-        }
+  .score-controls {
+    min-width: 0;
+  }
 
-        .save {
-            background: #2563eb;
-            color: white;
-        }
-
-        @media (max-width: 480px) {
-            .scale {
-                grid-template-columns: 1fr !important;
-            }
-
-            .box {
-                min-height: 125px;
-                width: 100%;
-            }
-        }
-    </style>
+  .delete-button {
+    justify-self: end;
+  }
+}
+    
+  </style>
 </head>
 
 <body>
@@ -182,203 +181,175 @@
         }
     </script>
 
-    <div class="container">
+    <h1>Aufgaben</h1>
+  <button id="add-task" type="button">+ Aufgabe</button>
+  <ul id="tasks" aria-label="Aufgabenliste"></ul>
 
-    <h1>Fortschritt</h1>
-    <p class="description">
-        Klicke auf ein Level, um den zugehörigen Inhalt zu bearbeiten.
-    </p>
+  <script>
+  const STORAGE_KEY = "aufgabenliste";
+  const taskList = document.querySelector("#tasks");
+  const addButton = document.querySelector("#add-task");
 
-    <div class="scale" id="scale"></div>
+  function saveTasks() {
+    const tasks = [...taskList.querySelectorAll(".task")].map(task => ({
+      name: task.querySelector("textarea").value,
+      score: Number(task.querySelector('input[type="number"]').value),
+      order: Number(task.dataset.order)
+    }));
 
-    <div class="status" id="status" aria-live="polite">
-        Inhalt wird automatisch gespeichert.
-    </div>
-
-    <button class="reset" id="reset" type="button">
-        Alle Inhalte zurücksetzen
-    </button>
-
-</div>
-
-<dialog id="editor">
-    <form id="editForm">
-        <h2 id="editorTitle">Inhalt bearbeiten</h2>
-
-        <label for="textInput">
-            Inhalt für dieses Level:
-        </label>
-
-        <textarea
-            id="textInput"
-            maxlength="2000"
-            placeholder="Hier deinen Inhalt eingeben ..."
-        ></textarea>
-
-        <div class="dialog-actions">
-            <button type="button" class="cancel" id="cancel">
-                Abbrechen
-            </button>
-
-            <button type="submit" class="save">
-                Speichern
-            </button>
-        </div>
-    </form>
-</dialog>
-
-<script>
-    const scale = document.getElementById("scale");
-    const editor = document.getElementById("editor");
-    const editForm = document.getElementById("editForm");
-    const textInput = document.getElementById("textInput");
-    const editorTitle = document.getElementById("editorTitle");
-    const status = document.getElementById("status");
-
-    const STORAGE_KEY = "bewertungsskala_0_bis_10";
-
-    // Starttexte für alle Zahlen
-    const defaults = {
-        0: "Sehr gut",
-        1: "",
-        2: "",
-        3: "",
-        4: "",
-        5: "Mittel",
-        6: "",
-        7: "",
-        8: "",
-        9: "",
-        10: "Sehr schlecht"
-    };
-
-    let texts = loadTexts();
-    let activeNumber = null;
-
-    // Farben: Grün (0) über Gelb bis Rot (10)
-    function getColor(number) {
-        const hue = 120 - number * 12;
-        return `hsl(${hue}, 75%, 65%)`;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+    } catch (error) {
+      console.error("Aufgaben konnten nicht gespeichert werden:", error);
     }
+  }
 
-    function loadTexts() {
-        try {
-            const stored = localStorage.getItem(STORAGE_KEY);
+  function autoResize(textarea) {
+    textarea.style.height = "auto";
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  }
 
-            if (stored) {
-                const parsed = JSON.parse(stored);
+  function updateTask(task, value) {
+    const scoreInput = task.querySelector('input[type="number"]');
+    const score = Math.max(0, Math.min(10, Math.round(Number(value) || 0)));
 
-                for (let i = 0; i <= 10; i++) {
-                    if (typeof parsed[i] !== "string") {
-                        parsed[i] = defaults[i];
-                    }
-                }
+    scoreInput.value = String(score);
 
-                return parsed;
-            }
-        } catch (error) {
-            console.warn("Gespeicherte Inhalte konnten nicht geladen werden.", error);
-        }
+    const hue = 120 - score * 12;
+    task.style.backgroundColor = `hsl(${hue} 85% 72%)`;
+    task.style.borderColor = `hsl(${hue} 75% 45%)`;
 
-        return { ...defaults };
-    }
+    sortTasks();
+    saveTasks();
+  }
 
-    function saveTexts() {
-        try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(texts));
-            status.textContent = "✓ Änderungen wurden gespeichert.";
-            return true;
-        } catch (error) {
-            status.textContent =
-                "Speichern nicht möglich. Bitte Browsereinstellungen prüfen.";
-            return false;
-        }
-    }
+  function sortTasks() {
+    const tasks = [...taskList.children];
 
-    function render() {
-        scale.replaceChildren();
-
-        for (let i = 0; i <= 10; i++) {
-            const box = document.createElement("button");
-
-            box.type = "button";
-            box.className = "box";
-            box.style.backgroundColor = getColor(i);
-            box.setAttribute(
-                "aria-label",
-                `Bewertung ${i}: ${texts[i] || "Kein Inhalt"}. Bearbeiten`
-            );
-
-            const number = document.createElement("span");
-            number.className = "number";
-            number.textContent = i;
-
-            const text = document.createElement("span");
-            text.className = "box-text";
-            text.textContent = texts[i] || "Kein Inhalt";
-
-            const hint = document.createElement("span");
-            hint.className = "edit-hint";
-            hint.textContent = "✎ Inhalt bearbeiten";
-
-            box.append(number, text, hint);
-
-            box.addEventListener("click", () => openEditor(i));
-
-            scale.appendChild(box);
-        }
-    }
-
-    function openEditor(number) {
-        activeNumber = number;
-
-        editorTitle.textContent = `Inhalt für Bewertung ${number}`;
-        textInput.value = texts[number] || "";
-
-        editor.showModal();
-        textInput.focus();
-    }
-
-    editForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        if (activeNumber === null) return;
-
-        const oldText = texts[activeNumber];
-        texts[activeNumber] = textInput.value.trim();
-
-        if (!saveTexts()) {
-            texts[activeNumber] = oldText;
-            return;
-        }
-
-        render();
-        editor.close();
-        activeNumber = null;
+    tasks.sort((a, b) => {
+      const scoreA = Number(a.querySelector('input[type="number"]').value);
+      const scoreB = Number(b.querySelector('input[type="number"]').value);
+      return scoreB - scoreA || Number(a.dataset.order) - Number(b.dataset.order);
     });
 
-    document.getElementById("cancel").addEventListener("click", () => {
-        editor.close();
-        activeNumber = null;
-    });
+    tasks.forEach(task => taskList.appendChild(task));
+  }
 
-    document.getElementById("reset").addEventListener("click", () => {
-        const confirmed = confirm(
-            "Möchtest du wirklich alle Inhalte zurücksetzen?"
-        );
+  function createTask({ name = "", score = 0, order = Date.now() + Math.random() } = {}) {
+    const task = document.createElement("li");
+    task.className = "task";
+    task.dataset.order = order;
 
-        if (!confirmed) return;
+    const nameInput = document.createElement("textarea");
+    nameInput.placeholder = "Aufgabe eingeben";
+    nameInput.setAttribute("aria-label", "Aufgabenname");
+    nameInput.rows = 1;
+    nameInput.value = name;
+    nameInput.addEventListener("input", () => autoResize(nameInput));
+    autoResize(nameInput);
 
-        texts = { ...defaults };
+    const controls = document.createElement("div");
+    controls.className = "score-controls";
 
-        if (saveTexts()) {
-            render();
-            status.textContent = "Alle Inhalte wurden zurückgesetzt.";
-        }
-    });
+    const decrementButton = document.createElement("button");
+    decrementButton.type = "button";
+    decrementButton.className = "decrement-button";
+    decrementButton.textContent = "−";
+    decrementButton.setAttribute("aria-label", "Wert verringern");
 
-    // Initiale Anzeige
-    render();
+    const scoreInput = document.createElement("input");
+    scoreInput.type = "number";
+    scoreInput.min = "0";
+    scoreInput.max = "10";
+    scoreInput.step = "1";
+    scoreInput.disabled = true;
+    scoreInput.value = String(Math.max(0, Math.min(10, Math.round(Number(score) || 0))));
+    scoreInput.setAttribute("aria-label", "Wert von 0 bis 10");
+
+    const incrementButton = document.createElement("button");
+    incrementButton.type = "button";
+    incrementButton.className = "increment-button";
+    incrementButton.textContent = "+";
+    incrementButton.setAttribute("aria-label", "Wert erhöhen");
+
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "delete-button";
+    deleteButton.textContent = "Löschen";
+    deleteButton.setAttribute("aria-label", "Aufgabe löschen");
+
+    controls.append(decrementButton, scoreInput, incrementButton);
+    task.append(nameInput, controls, deleteButton);
+    taskList.appendChild(task);
+
+    updateTask(task, scoreInput.value);
+  }
+
+  taskList.addEventListener("click", event => {
+    const button = event.target.closest("button");
+    if (!button) return;
+
+    const task = button.closest(".task");
+    if (!task) return;
+
+    const scoreInput = task.querySelector('input[type="number"]');
+
+    if (button.classList.contains("increment-button")) {
+      updateTask(task, Number(scoreInput.value) + 1);
+    } else if (button.classList.contains("decrement-button")) {
+      updateTask(task, Number(scoreInput.value) - 1);
+    } else if (button.classList.contains("delete-button")) {
+      task.remove();
+      saveTasks();
+    }
+  });
+
+  taskList.addEventListener("input", event => {
+    const task = event.target.closest(".task");
+    if (!task) return;
+
+    if (event.target.matches("textarea")) {
+      autoResize(event.target);
+      saveTasks();
+    } else if (
+      event.target.matches('input[type="number"]') &&
+      event.target.value !== ""
+    ) {
+      updateTask(task, event.target.value);
+    }
+  });
+
+  taskList.addEventListener("change", event => {
+    const task = event.target.closest(".task");
+
+    if (task && event.target.matches('input[type="number"]')) {
+      updateTask(task, event.target.value);
+    }
+  });
+
+  addButton.addEventListener("click", () => {
+    createTask();
+    saveTasks();
+    taskList.lastElementChild?.querySelector("textarea").focus();
+  });
+
+  function loadTasks() {
+    try {
+      const savedTasks = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+
+      if (Array.isArray(savedTasks) && savedTasks.length > 0) {
+        savedTasks.forEach(createTask);
+        sortTasks();
+        return;
+      }
+    } catch (error) {
+      console.error("Gespeicherte Aufgaben konnten nicht geladen werden:", error);
+    }
+
+    createTask();
+  }
+
+  loadTasks();
 </script>
 
 </body>
